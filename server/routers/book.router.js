@@ -40,4 +40,17 @@ router.delete('/', (req, res) => {
         });
 });
 
+router.put('/', (req, res) => {
+    let bookData = req.body;
+    Book.findByIdAndUpdate(req.body._id, bookData)
+        .then(() => {
+            console.log(`Updated book with id ${bookData._id}`);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log(`Error updating book with id ${bookData._id},  error: ${error}`);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;
